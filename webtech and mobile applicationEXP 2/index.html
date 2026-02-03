@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form Validation</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        function validateForm() {
+
+            var fname = document.forms["regForm"]["fname"].value;
+            var lname = document.forms["regForm"]["lname"].value;
+            var password = document.forms["regForm"]["password"].value;
+            var email = document.forms["regForm"]["email"].value;
+            var mobile = document.forms["regForm"]["mobile"].value;
+            var address = document.forms["regForm"]["address"].value;
+            var dob = document.forms["regForm"]["dob"].value;
+
+            var genderSelected = false;
+            var gender = document.getElementsByName("gender");
+            for (var i = 0; i < gender.length; i++) {
+                if (gender[i].checked) {
+                    genderSelected = true;
+                    break;
+                }
+            }
+
+            // First Name Validation
+            var namePattern = /^[A-Za-z]+$/;
+            if (!fname.match(namePattern) || fname.length < 6) {
+                alert("First Name must contain only alphabets and be at least 6 characters long");
+                return false;
+            }
+
+            // Password Validation
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long");
+                return false;
+            }
+
+            // Email Validation
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.match(emailPattern)) {
+                alert("Enter a valid Email ID");
+                return false;
+            }
+
+            // Mobile Validation
+            var mobilePattern = /^[0-9]{10}$/;
+            if (!mobile.match(mobilePattern)) {
+                alert("Mobile number must contain exactly 10 digits");
+                return false;
+            }
+
+            // Last Name Validation
+            if (lname === "") {
+                alert("Last Name cannot be empty");
+                return false;
+            }
+
+            // DOB Validation
+            if (dob === "") {
+                alert("Please select your Date of Birth");
+                return false;
+            }
+
+            // Gender Validation
+            if (!genderSelected) {
+                alert("Please select your Gender");
+                return false;
+            }
+
+            // Address Validation
+            if (address === "") {
+                alert("Address cannot be empty");
+                return false;
+            }
+
+            alert("Registration Successful!");
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form name="regForm" onsubmit="return validateForm()">
+
+            <label>First Name</label>
+            <input type="text" name="fname">
+
+            <label>Last Name</label>
+            <input type="text" name="lname">
+
+            <label>Password</label>
+            <input type="password" name="password">
+
+            <label>E-mail</label>
+            <input type="text" name="email">
+
+            <label>Mobile Number</label>
+            <input type="text" name="mobile">
+
+            <label>Date of Birth</label>
+            <input type="date" name="dob">
+
+            <label>Gender</label>
+            <div class="gender-group">
+                <input type="radio" name="gender" value="Male"> Male
+                <input type="radio" name="gender" value="Female"> Female
+                <input type="radio" name="gender" value="Other"> Other
+            </div>
+
+            <label>Address</label>
+            <textarea name="address"></textarea>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+</body>
+</html>
