@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Lost & Found</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Outfit', -apple-system, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .register-container {
+      display: flex;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    /* Left Side - Branding */
+    .brand-side {
+      flex: 1;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-side::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+    }
+
+    .brand-side::after {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      bottom: -50px;
+      left: -50px;
+    }
+
+    .brand-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-logo {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 36px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-side h1 {
+      color: white;
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .brand-side h1 span { color: rgba(255, 255, 255, 0.7); }
+
+    .brand-side p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: white;
+      font-size: 15px;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    /* Right Side - Form */
+    .form-side {
+      flex: 1;
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .form-header {
+      margin-bottom: 30px;
+    }
+
+    .form-header h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .form-header p {
+      color: #64748b;
+      font-size: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 18px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px 14px 50px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      color: #1e293b;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    .form-input::placeholder { color: #94a3b8; }
+
+    .btn-register {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-register:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .btn-register:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 24px;
+      color: #64748b;
+      font-size: 15px;
+    }
+
+    .form-footer a {
+      color: #6366f1;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .form-footer a:hover { text-decoration: underline; }
+
+    /* Alert */
+    .alert-box {
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .alert-error {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+
+    .alert-success {
+      background: #ecfdf5;
+      color: #059669;
+      border: 1px solid #a7f3d0;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .register-container { flex-direction: column; max-width: 450px; }
+      .brand-side { padding: 40px 30px; }
+      .brand-side h1 { font-size: 32px; }
+      .brand-side p { font-size: 15px; margin-bottom: 24px; }
+      .features { display: none; }
+      .form-side { padding: 40px 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="register-container">
+  <!-- Brand Side -->
+  <div class="brand-side">
+    <div class="brand-content">
+      <div class="brand-logo">
+        <i class="fas fa-search"></i>
+      </div>
+      <h1>Lost<span>&</span>Found</h1>
+      <p>Join our community and help reunite lost items with their rightful owners.</p>
+      
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon"><i class="fas fa-user-plus"></i></div>
+          <span>Free and easy registration</span>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+          <span>Your data is secure</span>
+        </div>
+        <div class="feature">
+          <div class="feature-icon"><i class="fas fa-heart"></i></div>
+          <span>Help your community</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Side -->
+  <div class="form-side">
+    <div class="form-header">
+      <h2>Create Account</h2>
+      <p>Fill in your details to get started</p>
+    </div>
+
+    <div id="alertBox"></div>
+
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <div class="input-wrapper">
+        <i class="fas fa-user"></i>
+        <input type="text" id="name" class="form-input" placeholder="Enter your name">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <div class="input-wrapper">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="email" class="form-input" placeholder="Enter your email">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <div class="input-wrapper">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" class="form-input" placeholder="Create a password (min 6 chars)">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Confirm Password</label>
+      <div class="input-wrapper">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="confirm" class="form-input" placeholder="Confirm your password" onkeydown="if(event.key==='Enter')register()">
+      </div>
+    </div>
+
+    <button id="registerBtn" class="btn-register" onclick="register()">
+      <i class="fas fa-user-plus"></i> Create Account
+    </button>
+
+    <div class="form-footer">
+      Already have an account? <a href="login.html">Sign in</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'http://localhost:5000/api';
+
+async function register() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const confirm = document.getElementById('confirm').value;
+  const alertBox = document.getElementById('alertBox');
+  const btn = document.getElementById('registerBtn');
+
+  alertBox.innerHTML = '';
+
+  if (!name || !email || !password) {
+    alertBox.innerHTML = '<div class="alert-box alert-error"><i class="fas fa-exclamation-circle"></i> Please fill in all fields.</div>';
+    return;
+  }
+
+  if (password !== confirm) {
+    alertBox.innerHTML = '<div class="alert-box alert-error"><i class="fas fa-exclamation-circle"></i> Passwords do not match.</div>';
+    return;
+  }
+
+  if (password.length < 6) {
+    alertBox.innerHTML = '<div class="alert-box alert-error"><i class="fas fa-exclamation-circle"></i> Password must be at least 6 characters.</div>';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Creating account...';
+
+  try {
+    const res = await fetch(`${API}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password })
+    });
+    const data = await res.json();
+
+    if (res.ok) {
+      alertBox.innerHTML = '<div class="alert-box alert-success"><i class="fas fa-check-circle"></i> Account created! Redirecting to login...</div>';
+      setTimeout(() => window.location.href = 'login.html', 1500);
+    } else {
+      alertBox.innerHTML = `<div class="alert-box alert-error"><i class="fas fa-exclamation-circle"></i> ${data.error || 'Registration failed.'}</div>`;
+      btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+      btn.disabled = false;
+    }
+  } catch {
+    alertBox.innerHTML = '<div class="alert-box alert-error"><i class="fas fa-exclamation-circle"></i> Cannot connect to server. Make sure the app is running.</div>';
+    btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+    btn.disabled = false;
+  }
+}
+</script>
+
+</body>
+</html>
